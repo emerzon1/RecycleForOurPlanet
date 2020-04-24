@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="google-site-verification" content="jKmhC_-fbnYhkvmR4x9u_AWtljjYU-76UY69_nL2Ub4" />
+	<title>Recycle</title>
+	<meta name="description" content="EcoGame">
+    <meta name="author" content="Evan Merzon">
+    <link href='https://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">	
+
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel ="stylesheet"type="text/css"href="css/main.css">
+</head>
+<body ng-app="EcoGame">
+	
+    
+    
+    <!--credit to kathylovan for making most of game-->
+	<div ng-controller="Game" >
+		<header>
+        <h1 style="margin-top:2%;"><mark>Recycling</mark></h1>
+        <nav>
+        <ul class="nav nav-pills  nav-justified">
+            <li role="presentation"><a href="home.html">Home</a></li>
+            <li role="presentation"><a href="index.html" class="active">Game</a></li>
+            <li role="presentation"><a href="https://www.epa.gov/recycle" target="_blank">Recycling Website</a></li>
+        </ul></nav>
+    </header>
+		<div class="container" ng-show="welcomeMsg">
+			<div class="jumbotron text-center" id="welcome-msg">
+				<h1>Recycle Right!</h1>
+				<br/>
+				<h2>Put Your Trash in the Right Bins</h2>
+				<br/>
+				<p class="game-desc">Learn what goes in what bin - Great for kids!</p>
+				
+				<p><button type="button" class="btn btn-default" ng-click="startGame()" id="start-game-btn">Start game!</button></p>
+			</div>
+		</div>
+
+		<div class="container" id="game-console" ng-show="loadGame" ng-if="allItems.length !== 0">
+			<h1 class="text-center">Which Bin?</h1>
+			<br/>
+			<div class="row" id="row-items">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+					<div ng-repeat="item in allItems | limitTo:1 track by $index">
+						<h1 id="item-name">{{ item.name }}</h1>
+					</div>	
+				</div>		
+			</div>
+			<div class="row" id="row-bins">
+				<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 text-center bins"  id="compost-bin" ng-click="addCompost()">
+					<h3 class="bin-labels">Compost</h3>
+				</div>
+				<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 text-center bins" id="garbage-bin" ng-click="addGarbage()">
+					<h3 class="bin-labels">Garbage</h3>
+				</div>
+				<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 text-center bins" id="recycle-bin" ng-click="addRecycle()">
+					<h3 class="bin-labels">Recycle</h3>
+				</div>
+			</div>
+			<br/>
+			<h4 class="text-center">Items remaining: {{ allItems.length }}</h4>
+		</div>
+
+		<div class="container" ng-show="isWinner">
+			<div class="jumbotron text-center" id="winner-msg">
+				<h1 id="congrats">Congrats <span class="glyphicon glyphicon-star"></span></h1>
+				<br/>
+				<h2 class="congrats-text">{{ countOfAllItems }} out of {{ countOfAllItems }} correct</h2>
+				<br/>
+				<br/>
+				<h2 class="congrats-text">You're an earth-friendly whiz!</h2>
+				<br/>
+				<br/>
+				<p>
+					<button type="button" class="btn btn-default" ng-click="restartGame()" id="play-again-btn">
+						Play again
+					</button>
+				</p>
+				<button type="button" class="btn btn-primary answers-btn" data-toggle="modal" data-target="#answer-key">
+					See answers
+				</button>
+			</div>
+		</div>
+
+		<div class="container" ng-show="notWinner">
+			<div class="jumbotron text-center" id="not-winner-msg">
+				<h1 id="try-again">Oops <span class="glyphicon glyphicon-exclamation-sign"></span></h1>
+				<br/>
+				<h2 class="not-winner-text">{{ correctItems }} out of {{ countOfAllItems }} correct</h2>
+				<br/>
+				<br/>
+				<h2 class="not-winner-text">Good luck next time.  Remember, always recycle!</h2>
+				<br/>
+				<br/>
+				<p><button type="button" class="btn btn-default" ng-click="restartGame()" id="play-again-btn">Try again</button></p>
+				<button type="button" class="btn btn-primary answers-btn" data-toggle="modal" data-target="#answer-key">
+					See answers
+				</button>
+			</div>
+		</div>
+		<!-- Modal for answer key -->
+		<div class="modal fade" id="answer-key" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h2 class="modal-title">Answers</h4>
+					</div>
+					<div class="modal-body">
+						<h3>Compost</h3><br/>
+						<div ng-repeat="item in compostAnswers">
+							<p>{{ item.name }}</p>
+						</div><br/>
+						<h3>Garbage</h3><br/>
+						<div ng-repeat="item in garbageAnswers">
+							<p>{{ item.name }}</p>
+						</div><br/>
+						<h3>Recycle</h3><br/>
+						<div ng-repeat="item in recycleAnswers">
+							<p>{{ item.name }}</p>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer>
+		<div class="container text-center" id="footer">
+		</div>
+	</footer>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+	<script src="js/items.js"></script>
+	<script src="js/app.js"></script>
+</body>
+</html>
