@@ -1,0 +1,149 @@
+body {
+	padding-top: 20px;
+	padding-bottom: 20px;
+	font-family: 'Fjalla One', sans-serif;
+}
+
+body h1, h2, h3 {
+	margin: 0;
+}
+
+#footer {
+	bottom: 0;
+	background-color: rgba(192, 192, 192, 0.2);
+	padding: 4px;
+	position: fixed;
+	width: 100%;
+}
+
+.footer-link {
+	color: gray;
+	font-size: 10px;
+}
+
+.glyphicon-star, #congrats {
+	color: rgb(230, 149, 0);
+}
+
+.congrats-text {
+	color: rgba(0, 128, 128, 0.9);
+}
+
+#welcome-msg {
+	background-color: rgba(0, 128, 0, 0.1);
+	color: green;
+}
+
+#winner-msg {
+	background-color: rgba(0, 128, 128, 0.2);
+}
+
+.game-desc {
+	font-family: 'Helvetica', sans-serif;
+	color: black;
+}
+
+#start-game-btn {
+	border-style: none;
+	background-color: rgb(160, 82, 45);
+	color: white;
+	font-size: 1em;
+}
+
+#play-again-btn {
+	border-style: none;
+	background-color: green;
+	color: white;
+	font-size: 1em;
+}
+
+#play-again-btn:hover {
+	background-color: white;
+	color: green;
+}
+
+#start-game-btn:hover {
+	background-color: white;
+	color: rgb(160, 82, 45);
+}
+
+#row-items {
+	min-height: 200px;
+	background-color: rgba(0, 255, 255, 0.08);
+	padding-top: 80px;
+	padding-bottom: 30px;
+}
+
+#item-name {
+	font-size: 2.5em;
+}
+
+#row-bins {
+	min-height: 80px;
+}
+
+.bin-labels {
+	line-height: 60px;
+	font-size: 1.4em;
+}
+
+#compost-bin, #garbage-bin, #recycle-bin {
+	min-height: 60px;
+	color: white;
+}
+
+#compost-bin {
+	background-color: rgb(139, 69, 19);
+}
+
+#garbage-bin {
+	background-color: rgb(0, 0, 128);
+}
+
+#recycle-bin {
+	background-color: rgb(0, 128, 0);
+}
+
+#compost-bin:hover {
+	background-color: white;
+	color: rgb(139, 69, 19);
+	outline-style: solid;
+	outline-width: 2px;
+	outline-color: rgb(139, 69, 19);
+	outline-offset: -4px;
+}
+
+#garbage-bin:hover {
+	background-color: white;
+	color: rgb(0, 0, 128);
+	outline-style: solid;
+	outline-width: 2px;
+	outline-color: rgb(0, 0, 128);
+	outline-offset: -4px;
+}
+
+#recycle-bin:hover {
+	background-color: white;
+	color: rgb(0, 128, 0);
+	outline-style: solid;
+	outline-width: 2px;
+	outline-color: rgb(0, 128, 0);
+	outline-offset: -4px;
+}
+
+
+.glyphicon-exclamation-sign, #try-again {
+	color: rgba(255, 0, 0, 0.6);
+}
+
+#not-winner-msg {
+	background-color: rgba(230, 149, 0, 0.2);
+}
+
+.not-winner-text {
+	color: rgb(255, 128, 0);
+}
+
+.answers-btn {
+	font-size: 1.4em;
+}
